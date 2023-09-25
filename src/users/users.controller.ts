@@ -6,14 +6,25 @@ import {
   Param,
   Post,
   ParseIntPipe,
+  Res,
+  // Response,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
+import { Response } from 'express';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Get('cookie')
+  testCookie(@Res({ passthrough: true }) response: Response) {
+    console.log('Inside cookie');
+    //
+    response.cookie('key', 'value');
+    console.log('response cookie', response.cookie);
+  }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
