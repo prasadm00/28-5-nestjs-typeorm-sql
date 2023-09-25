@@ -3,6 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersMoudel } from './users/users.module';
 import { TasksModule } from './tasks/tasks.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { BullModule } from '@nestjs/bull';
+import { AudioModule } from './audio/audio.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -18,6 +21,13 @@ import { ScheduleModule } from '@nestjs/schedule';
     UsersMoudel,
     ScheduleModule.forRoot(),
     TasksModule,
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
+    AudioModule,
   ],
   controllers: [],
   providers: [],
