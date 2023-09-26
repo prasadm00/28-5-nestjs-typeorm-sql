@@ -5,6 +5,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { BullModule } from '@nestjs/bull';
 import { AudioModule } from './audio/audio.module';
+import { EventsModule } from './gatewaysevents/events.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { AudioModule } from './audio/audio.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    EventsModule,
     UsersMoudel,
     ScheduleModule.forRoot(),
     TasksModule,
